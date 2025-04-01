@@ -11,7 +11,7 @@
 # Usage: cmake <mpas-bundle src dir> -DCMAKE_BUILD_TYPE=RelWithDebINfo -DCMAKE_VERBOSE_MAKEFILE=ON -DSNAPSHOT_DATE=2024-06-01 -DMPAS_DOUBLE_PRECISION=OFF
 
 cmake_minimum_required( VERSION 3.14 )
-project( mpas-bundle VERSION 3.0.2 LANGUAGES C CXX Fortran )
+project( mpas-bundle VERSION 3.0.0 LANGUAGES C CXX Fortran )
 
 ## ECBuild integration
 include(GNUInstallDirs)
@@ -44,21 +44,21 @@ ecbuild_bundle( PROJECT atlas     GIT "https://github.com/ecmwf/atlas.git" TAG 0
 
 #TODO: When mpas-bundle becomes a public repo, consider changing the default value of BUNDLE_SKIP_ROPP-UFO to "ON"
 option(BUNDLE_SKIP_ROPP-UFO "Don't build ROPP-UFO"  "ON") # Build ropp-ufo unless user passes -DBUNDLE_SKIP_ROPP-UFO=ON
-ecbuild_bundle( PROJECT ropp-ufo  GIT "https://github.com/JCSDA-internal/ropp-test.git"   TAG 96a0397 )
+ecbuild_bundle( PROJECT ropp-ufo  GIT "https://github.com/JCSDA-internal/ropp-test.git"   BRANCH develop UPDATE )
 option(BUNDLE_SKIP_RTTOV "Don't build rttov"  "ON") # Skip rttov build unless user passes -DBUNDLE_SKIP_RTTOV=OFF
 ecbuild_bundle( PROJECT rttov     GIT "https://github.com/JCSDA-internal/rttov.git"       BRANCH develop UPDATE )
 
-ecbuild_bundle( PROJECT oops      GIT "https://github.com/JCSDA/oops.git"        TAG d772173 )
-ecbuild_bundle( PROJECT vader     GIT "https://github.com/JCSDA/vader.git"       TAG 6d56a1e )
-ecbuild_bundle( PROJECT saber     GIT "https://github.com/JCSDA/saber.git"       TAG bba6f7e )
-ecbuild_bundle( PROJECT crtm      GIT "https://github.com/JCSDA/CRTMv3.git"      TAG 73102a2 )
+ecbuild_bundle( PROJECT oops      GIT "https://github.com/JCSDA/oops.git"        BRANCH develop UPDATE )
+ecbuild_bundle( PROJECT vader     GIT "https://github.com/JCSDA/vader.git"       BRANCH develop UPDATE )
+ecbuild_bundle( PROJECT saber     GIT "https://github.com/JCSDA/saber.git"       BRANCH develop UPDATE)
+ecbuild_bundle( PROJECT crtm      GIT "https://github.com/JCSDA/CRTMv3.git"      BRANCH develop UPDATE )
 
 option(ENABLE_IODA_DATA "Obtain ioda test data from ioda-data repository (vs tarball)" ON)
-ecbuild_bundle( PROJECT ioda-data GIT "https://github.com/JCSDA-internal/ioda-data.git"   TAG bcb0754 )
-ecbuild_bundle( PROJECT ioda      GIT "https://github.com/JCSDA/ioda.git"                 TAG d49ed17 )
+ecbuild_bundle( PROJECT ioda-data GIT "https://github.com/JCSDA-internal/ioda-data.git"   BRANCH develop UPDATE )
+ecbuild_bundle( PROJECT ioda      GIT "https://github.com/JCSDA/ioda.git"                 BRANCH develop UPDATE )
 option(ENABLE_UFO_DATA "Obtain ufo test data from ufo-data repository (vs tarball)" ON)
-ecbuild_bundle( PROJECT ufo-data  GIT "https://github.com/JCSDA-internal/ufo-data.git"    TAG 9e4eb40 )
-ecbuild_bundle( PROJECT ufo       GIT "https://github.com/JCSDA/ufo.git"                  TAG 94d50d6 )
+ecbuild_bundle( PROJECT ufo-data  GIT "https://github.com/JCSDA-internal/ufo-data.git"    BRANCH develop UPDATE )
+ecbuild_bundle( PROJECT ufo       GIT "https://github.com/JCSDA/ufo.git"                  BRANCH develop UPDATE )
 
 
 # Find external ESMF for mpas-model (optional)
@@ -67,10 +67,10 @@ find_package(ESMF 8.3.0 MODULE)
 set(MPAS_DOUBLE_PRECISION "ON" CACHE STRING "MPAS-Model: Use double precision 64-bit Floating point.")
 set(MPAS_CORES init_atmosphere atmosphere CACHE STRING "MPAS-Model: cores to build.")
 
-ecbuild_bundle( PROJECT MPAS      GIT "https://github.com/MPAS-Dev/MPAS-Model" TAG v8.2.2 )
+ecbuild_bundle( PROJECT MPAS      GIT "https://github.com/MPAS-Dev/MPAS-Model" BRANCH develop UPDATE )
 option(ENABLE_MPAS_JEDI_DATA "Obtain mpas-jedi test data from mpas-jedi-data repository (vs tarball)" ON)
-ecbuild_bundle( PROJECT mpas-jedi-data  GIT "https://github.com/JCSDA-internal/mpas-jedi-data.git"  TAG 12cdc56 )
-ecbuild_bundle( PROJECT mpas-jedi GIT "https://github.com/JCSDA/mpas-jedi"     TAG 3.0.2.mmm )
+ecbuild_bundle( PROJECT mpas-jedi-data  GIT "https://github.com/JCSDA-internal/mpas-jedi-data.git"  BRANCH develop UPDATE )
+ecbuild_bundle( PROJECT mpas-jedi GIT "https://github.com/JCSDA/mpas-jedi"     BRANCH develop UPDATE )
 
 # Set GIT_BRANCH_FUNC to MPAS-JEDI's current branch so that it can be used for mpas-jedi-data
 find_branch_name(REPO_DIR_NAME mpas-jedi)
