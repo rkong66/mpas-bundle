@@ -37,10 +37,10 @@ endif()
 
 option(BUNDLE_SKIP_ECKIT "Don't build eckit" "ON" ) # Skip eckit build unless user passes -DBUNDLE_SKIP_ECKIT=OFF
 option(BUNDLE_SKIP_FCKIT "Don't build fckit" "ON" ) # Skip eckit build unless user passes -DBUNDLE_SKIP_FCKIT=OFF
-option(BUNDLE_SKIP_ATLAS "Don't build atlas" "ON" ) # Skip atlas build unless user passes -DBUNDLE_SKIP_ATLAS=OFF
+option(BUNDLE_SKIP_ATLAS "Don't build atlas" "OFF" ) # Skip atlas build unless user passes -DBUNDLE_SKIP_ATLAS=OFF
 ecbuild_bundle( PROJECT eckit     GIT "https://github.com/ecmwf/eckit.git" TAG 1.24.4 )
 ecbuild_bundle( PROJECT fckit     GIT "https://github.com/ecmwf/fckit.git" TAG 0.11.0 )
-ecbuild_bundle( PROJECT atlas     GIT "https://github.com/ecmwf/atlas.git" TAG 0.34.0 )
+ecbuild_bundle( PROJECT atlas     GIT "https://github.com/ecmwf/atlas.git" TAG 0.38.0 )
 
 #TODO: When mpas-bundle becomes a public repo, consider changing the default value of BUNDLE_SKIP_ROPP-UFO to "ON"
 option(BUNDLE_SKIP_ROPP-UFO "Don't build ROPP-UFO"  "ON") # Build ropp-ufo unless user passes -DBUNDLE_SKIP_ROPP-UFO=ON
@@ -52,13 +52,14 @@ ecbuild_bundle( PROJECT oops      GIT "https://github.com/JCSDA/oops.git"       
 ecbuild_bundle( PROJECT vader     GIT "https://github.com/JCSDA/vader.git"       BRANCH develop UPDATE )
 ecbuild_bundle( PROJECT saber     GIT "https://github.com/JCSDA/saber.git"       BRANCH develop UPDATE)
 ecbuild_bundle( PROJECT crtm      GIT "https://github.com/JCSDA/CRTMv3.git"      BRANCH develop UPDATE )
+ecbuild_bundle( PROJECT ppro      GIT "https://github.com/rkong66/ppro.git" BRANCH main )
 
 option(ENABLE_IODA_DATA "Obtain ioda test data from ioda-data repository (vs tarball)" ON)
 ecbuild_bundle( PROJECT ioda-data GIT "https://github.com/JCSDA-internal/ioda-data.git"   BRANCH develop UPDATE )
 ecbuild_bundle( PROJECT ioda      GIT "https://github.com/JCSDA/ioda.git"                 BRANCH develop UPDATE )
 option(ENABLE_UFO_DATA "Obtain ufo test data from ufo-data repository (vs tarball)" ON)
 ecbuild_bundle( PROJECT ufo-data  GIT "https://github.com/JCSDA-internal/ufo-data.git"    BRANCH develop UPDATE )
-ecbuild_bundle( PROJECT ufo       GIT "https://github.com/JCSDA/ufo.git"                  BRANCH develop UPDATE )
+ecbuild_bundle( PROJECT ufo       GIT "https://github.com/rkong66/ufo.git"                BRANCH feature/ppro UPDATE )
 
 
 # Find external ESMF for mpas-model (optional)
@@ -70,7 +71,7 @@ set(MPAS_CORES init_atmosphere atmosphere CACHE STRING "MPAS-Model: cores to bui
 ecbuild_bundle( PROJECT MPAS      GIT "https://github.com/MPAS-Dev/MPAS-Model" BRANCH develop UPDATE )
 option(ENABLE_MPAS_JEDI_DATA "Obtain mpas-jedi test data from mpas-jedi-data repository (vs tarball)" ON)
 ecbuild_bundle( PROJECT mpas-jedi-data  GIT "https://github.com/JCSDA-internal/mpas-jedi-data.git"  BRANCH develop UPDATE )
-ecbuild_bundle( PROJECT mpas-jedi GIT "https://github.com/JCSDA/mpas-jedi"     BRANCH develop UPDATE )
+ecbuild_bundle( PROJECT mpas-jedi GIT "https://github.com/rkong66/mpas-jedi.git"     BRANCH feature/ppro UPDATE )
 
 # Set GIT_BRANCH_FUNC to MPAS-JEDI's current branch so that it can be used for mpas-jedi-data
 find_branch_name(REPO_DIR_NAME mpas-jedi)
